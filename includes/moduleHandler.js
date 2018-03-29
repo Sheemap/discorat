@@ -11,6 +11,7 @@ const common = require('./common.js');
 
 var comms = {};
 
+var listenchan = app.config.general.listenchan.split(',');
 
 //Load commands
 var commcount = 0;
@@ -28,10 +29,15 @@ exports.parse = function(msg){
 
 	let authid = msg.author.id;
 	let chanid = msg.channel.id;
-	let servid = msg.guild.id;
 
 	let comm = content.split(' ')[0].replace(app.prefix,'');
 	let args = content.replace(app.prefix+comm+' ','').split(' ');
+
+	if((msg.channel.type == 'dm' && !app.pmcomms) || (msg.channel.type != 'dm' && !listenchan.includes(chanid))){
+		console.log('asdf')
+		return;
+	}
+
 
 
 	logger.log('info',`Command from ${msg.author.username}: ${msg.content}`)
@@ -61,7 +67,6 @@ exports.react = function(reaction,user,added){
 
 	let authid = reaction.message.author.id;
 	let chanid = reaction.message.channel.id;
-	let servid = reaction.message.guild.id;
 
 	let comm = content.split(' ')[0].replace(app.prefix,'');
 	let args = content.replace(app.prefix+comm+' ','').split(' ');

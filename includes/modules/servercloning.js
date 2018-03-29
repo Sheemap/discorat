@@ -1,6 +1,4 @@
 'use strict'
-const fs = require('fs');
-
 const common = require('../common.js');
 const app = require('../../app.js');
 const logger = require('../logger.js');

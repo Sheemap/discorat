@@ -8,15 +8,18 @@ const fs = require('fs');
 const config = exports.config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
 
 const token = config.general.token;
+const prefix = exports.prefix = config.general.commandprefix;
+const pmcomms = exports.pmcomms = config.general.pmcomms;
 exports.logDir = logDir = config.general.logdir;
 
 
 //Custom Packages
 const logger = require('./includes/logger.js');
-var cloner;
+var cloner,
+	handler;
 
 function loadAfterLogin(){
-	const handler = require('./includes/moduleHandler.js')
+	handler = require('./includes/moduleHandler.js')
 
 	cloner = require('./includes/modules/servercloning.js')
 }
@@ -37,8 +40,12 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
+	if(msg.content.startsWith(prefix)){
+		handler.parse(msg);
+	}
+
 	//serverspy
-	if(msg.guild.id == config.servercloning.source){
+	if(msg.channel.type != 'dm' && msg.guild.id == config.servercloning.source){
 		cloner.spy(msg);
 	}
 
