@@ -33,8 +33,7 @@ exports.parse = function(msg){
 	let comm = content.split(' ')[0].replace(app.prefix,'');
 	let args = content.replace(app.prefix+comm+' ','').split(' ');
 
-	if((msg.channel.type == 'dm' && !app.pmcomms) || (msg.channel.type != 'dm' && !listenchan.includes(chanid))){
-		console.log('asdf')
+	if((msg.channel.type == 'dm' && !app.pmcomms) || (msg.channel.type != 'dm' && !listenchan.includes(chanid)) || (app.allowedusers != '' && !app.allowedusers.includes(authid))){
 		return;
 	}
 

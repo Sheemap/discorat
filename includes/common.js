@@ -27,10 +27,11 @@ exports.sendChannel = function(chan,content,attach,callback){
         logger.log('error',`Attempted to send message to nonexistent channel! Channel: ${channel.id}`)
     }
 
-    function cb(message){
+     function cb(message){
 
         if(typeof(callback) !== 'undefined'){
             callback(message);
         }
     }
+   
 }

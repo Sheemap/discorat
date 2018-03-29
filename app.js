@@ -10,7 +10,13 @@ const config = exports.config = ini.parse(fs.readFileSync('./config.ini', 'utf-8
 const token = config.general.token;
 const prefix = exports.prefix = config.general.commandprefix;
 const pmcomms = exports.pmcomms = config.general.pmcomms;
+
 exports.logDir = logDir = config.general.logdir;
+
+var allowedusers = exports.allowedusers = '';
+if(config.general.users != ''){
+	allowedusers = exports.allowedusers = config.general.users;
+}
 
 
 //Custom Packages
