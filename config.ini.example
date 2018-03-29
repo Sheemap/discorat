@@ -1,22 +1,22 @@
 [general]
 
 ;Bot login token
-token= MjUzOTcyOTk5NzEwMDQ4MjU3.DZ4Hug.AkA2SrPgC6u--_YMnB6Z1VAH_QQ
+token= 
 
 commandprefix= !
 
 ;Log files location, must be absolute
-logdir= /home/breadman/Documents/Code/DiscoRat/logs
+logdir= /path/must/be/absolute
 
 ;Optional channel ID to listen for commands. Will by default accept via PM, or the server clone destination.
-listenchan= 208298947997990912
+listenchan= 
 
 ;Listen for commands via PM
 pmcomms= true
 
 ;Respond to commands only from these user IDs, (seperate by commas)
 ;Leave blank to allow all users
-users= 104848260954357760
+users= 
 
 [servercloning]
 
@@ -24,7 +24,7 @@ users= 104848260954357760
 enabled= false
 
 ;Server ID to clone
-source= 215676868718755840
+source= 
 
 ;Server ID for which to write to
-destination= 428744348746907669
+destination= 
