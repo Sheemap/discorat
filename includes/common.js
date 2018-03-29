@@ -22,16 +22,18 @@ exports.sendChannel = function(chan,content,attach,callback){
     }
 
     if(channel !== ''){
-        channel.send(content,attach).then(message => cb(message));//.then(message => sent=message);//
+        channel.send(content,attach).then(message => cb(message,callback));//.then(message => sent=message);//
     }else{
         logger.log('error',`Attempted to send message to nonexistent channel! Channel: ${channel.id}`)
     }
 
-     function cb(message){
 
-        if(typeof(callback) !== 'undefined'){
-            callback(message);
-        }
-    }
    
+}
+
+function cb(message,callback){
+
+    if(typeof(callback) !== 'undefined'){
+        callback(message);
+    }
 }

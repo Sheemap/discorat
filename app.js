@@ -22,12 +22,13 @@ if(config.general.users != ''){
 //Custom Packages
 const logger = require('./includes/logger.js');
 var cloner,
+	chanspy,
 	handler;
 
 function loadAfterLogin(){
-	handler = require('./includes/moduleHandler.js')
-
-	cloner = require('./includes/modules/servercloning.js')
+	handler = require('./includes/moduleHandler.js');
+	chanspy = require('./includes/modules/channelspy.js');
+	cloner = require('./includes/modules/servercloning.js');
 }
 
 
@@ -48,6 +49,11 @@ client.on('message', msg => {
 
 	if(msg.content.startsWith(prefix)){
 		handler.parse(msg);
+	}
+
+	//channelspy
+	if(msg.channel.id == chanspy.channel && chanspy.enable){
+		chanspy.parse(msg);
 	}
 
 	//serverspy
