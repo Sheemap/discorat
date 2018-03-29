@@ -23,8 +23,38 @@ exports.main = function(msg,args){
 		case 'channels':
 			listChans(msg,args[1]);
 			break;
+
+		case 'members':
+			listMems(msg,args[1]);
+			break;
 	}
 	
+}
+
+function listMems(msg,guildid){
+	let rawguilds = app.client.guilds.array();
+
+	let content = '';
+
+	for(let i=0;i<rawguilds.length;i++){
+		if(rawguilds[i].id == guildid){
+
+			content += `**Users I see in ${rawguilds[i].name}**\n\n`
+
+			let rawmems = rawguilds[i].members.array();
+
+			for(let w=0;w<rawmems.length;w++){11
+				content += `**${rawmems[w].user.username}** ~ ${rawmems[w].id}\n`;
+			}
+
+		}
+	}
+
+	if(content == ''){
+		common.sendMsg(msg,`No guild found with ID **${guildid}**, please try again.`);
+	}else{
+		common.sendMsg(msg,content)
+	}
 }
 
 function listChans(msg,chanid){
