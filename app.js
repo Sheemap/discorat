@@ -13,6 +13,13 @@ exports.logDir = logDir = config.general.logdir;
 
 //Custom Packages
 const logger = require('./includes/logger.js');
+var cloner;
+
+function loadAfterLogin(){
+	const handler = require('./includes/moduleHandler.js')
+
+	cloner = require('./includes/modules/servercloning.js')
+}
 
 
 if(token == ''){
@@ -25,9 +32,15 @@ if(token == ''){
 client.on('ready', () => {
     exports.BOTID = BOTID = client.user.id;
     logger.log('info',`Logged in as ${client.user.tag}`);
+    loadAfterLogin();
 });
 
 client.on('message', msg => {
+
+	//serverspy
+	if(msg.guild.id == config.servercloning.source){
+		cloner.spy(msg);
+	}
 
 });
 
