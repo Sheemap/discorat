@@ -10,7 +10,7 @@ exports.sendMsg = function(msg,content,reply){
     }
 }
 
-exports.sendChannel = function(chan,content,timeout,callback){
+exports.sendChannel = function(chan,content,attach,callback){
     
     let all_channels = app.client.channels.array();
     let channel = '';
@@ -22,7 +22,7 @@ exports.sendChannel = function(chan,content,timeout,callback){
     }
 
     if(channel !== ''){
-        channel.send(content).then(message => cb(message));//.then(message => sent=message);//
+        channel.send(content,attach).then(message => cb(message));//.then(message => sent=message);//
     }else{
         logger.log('error',`Attempted to send message to nonexistent channel! Channel: ${channel.id}`)
     }

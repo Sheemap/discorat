@@ -59,10 +59,16 @@ if(enabled){
 
 exports.spy = function (msg){
 	let chans = dest.channels.array();
+	let attachments = msg.attachments.array();
+	let attach = [];
+
+	for(let i=0;i<attachments.length;i++){
+		attach.push(attachments[i].url)
+	}
 
 	for(let i=0;i<chans.length;i++){
 		if(chans[i].name.includes(msg.channel.id)){
-			common.sendChannel(chans[i].id,`**${msg.author.username}:** ${msg.content}`);
+			common.sendChannel(chans[i].id,`**${msg.author.username}:** ${msg.content}`,{files: attach});
 		}
 	}
 }
